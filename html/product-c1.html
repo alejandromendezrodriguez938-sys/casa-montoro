@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/assets/logo/logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>C1 - CUBRECAMA</title>
+</head>
+
+<body>
+  <section id="header">
+    <div class="brand-wrap">
+      <a href="index.html"><img src="/assets/logo/logo.png" class="logo" alt=""></a>
+      <span class="brand-name">CASA MONTORO</span>
+    </div>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="productos.html">PRODUCTOS</a></li>
+        <li><a href="nosotros.html">NOSOTROS</a></li>
+        <li><a href="https://wa.me/59169609667" target="_blank" rel="noopener noreferrer">CONTACTARSE</a></li>
+      </ul>
+      <div id="mobile">
+        <a href="productos.html#product1"><i class="fa-solid fa-bag-shopping"></i></a>
+        <i id="bar" class="fas fa-outdent"></i>
+      </div>
+    </div>
+  </section>
+
+  <main class="section-p1">
+    <nav style="margin-bottom:12px;"><a href="productos.html">← Volver a productos</a></nav>
+
+    <style>
+      .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+      .gallery { display: flex; flex-direction: column; gap: 12px; }
+      .main-image { width: 100%; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+      .thumbs { display: flex; gap: 8px; margin-top: 6px; }
+      .thumbs img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1px solid #e6e6e6; transition: transform 0.12s ease; }
+      .thumbs img:hover { transform: scale(1.03); }
+      .product-info h1 { font-size: 24px; margin: 0 0 6px 0; letter-spacing: 1px; }
+      .rating { color: #f0a500; margin: 6px 0; }
+      .price-big { color: #088178; font-size: 22px; font-weight: 800; letter-spacing: 0.6px; }
+      .old-price { text-decoration: line-through; color: #606063; margin-left: 8px; }
+      .offer-badge { display: inline-block; background: #ca0808; color: #fffbe3; padding: 4px 8px; border-radius: 6px; font-weight: 700; margin-left: 10px; }
+      .product-description { margin-top: 10px; color: #222; }
+      .shipping-note { margin-top: 10px; color: #606063; font-size: 14px; }
+      .model-help { margin-top: 8px; color: #606063; font-size: 14px; }
+      .model-thumbs { display: flex; gap: 10px; align-items: center; }
+      .model { text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; }
+      .model-thumb-img { width: 78px; height: 78px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+      .model-label { font-size: 12px; color: #606063; margin-top: 0; }
+      .select-model-btn {
+        border: 1px solid #088178;
+        background: #fff;
+        color: #088178;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .select-model-btn:hover {
+        background: #088178;
+        color: #fff;
+      }
+      .model-selected .select-model-btn {
+        background: #088178;
+        color: #fff;
+      }
+      .selected-model-text { margin-top: 12px; color: #222; font-weight: 700; }
+      .purchase-row { margin-top: 12px; display: flex; align-items: center; gap: 12px; }
+      .selected-count { color: #606063; font-weight: 600; }
+      .stock-status { margin-left: auto; color: #606063; font-weight: 600; }
+      .buy-row { display: flex; gap: 12px; margin-top: 14px; align-items: center; }
+      .buy-row .btn { padding: 10px 16px; border-radius: 8px; cursor: pointer; border: none; }
+      .btn-primary { background: #088178; color: #fff; }
+      .btn-whatsapp { background: #25D366; color: #fff; }
+      .model { position: relative; }
+      .model img { transition: transform 0.12s ease; }
+      .model img:hover { transform: scale(1.04); }
+      .model-selected { box-shadow: 0 10px 24px rgba(8,129,120,0.12); transform: translateY(-6px); border-radius: 10px; }
+      .wa-box { display: inline-flex; align-items: center; gap: 12px; padding: 10px 14px; background: #fff; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid rgba(8,129,120,0.08); }
+      .wa-box .wa-icon { color: #25D366; font-size: 22px; }
+      .wa-box .btn.btn-whatsapp { padding: 10px 14px; border-radius: 8px; }
+      .model-selected::after { content: '✓'; position: absolute; top: 6px; right: 6px; background: #088178; color: #fff; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; box-shadow: 0 4px 10px rgba(8,129,120,0.12); }
+      .specs, .reviews { margin-top: 22px; }
+      .product-info, .product-info p, .product-info .price-big { letter-spacing: 0.6px; }
+      .specs { font-family: Georgia, 'Times New Roman', serif; font-size: 15px; line-height: 1.7; letter-spacing: 0.8px; }
+      .specs ul { margin-left: 18px; }
+      .specs li { margin-bottom: 8px; }
+      @media (max-width: 900px) { .product-grid { grid-template-columns: 1fr; } .thumbs img { width: 56px; height: 56px; } }
+    </style>
+
+    <section class="product-grid">
+      <div class="gallery">
+        <img id="mainImg" src="/assets/clothes/LE.jpg" alt="C1 - CUBRECAMA" class="main-image">
+        <div class="thumbs">
+          <img src="/assets/clothes/LE.jpg" data-src="/assets/clothes/LE.jpg" alt="thumb1">
+          <img src="/assets/clothes/LE.jpg" data-src="/assets/clothes/LE.jpg" alt="thumb2">
+          <img src="/assets/clothes/LE.jpg" data-src="/assets/clothes/LE.jpg" alt="thumb3">
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h1>C1 - CUBRECAMA</h1>
+        <p class="price-big">140.00 Bs <span class="old-price">155.00 Bs</span><span class="offer-badge">OFERTA</span></p>
+
+        <p class="product-description">Cobertor luminoso que brilla de noche. Material suave y resistente. Ideal para uso diario y como elemento decorativo.</p>
+
+        <div class="shipping-note">Envío a todo el país y entregas a coordinar</div>
+
+        <div class="model-help">Selecciona un modelo para comprar:</div>
+
+        <!-- Color options removed as requested -->
+
+        <!-- Model options -->
+        <div style="margin-top:16px;">
+          <h4 style="margin:6px 0;">Modelos</h4>
+          <div class="model-thumbs">
+
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="mariposa">
+              <img src="/assets/clothes/c1/Mariposa.jpg" alt="modelo-mariposa" class="model-thumb-img">
+              <div class="model-label">Mariposa</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="gatos-rosa">
+              <img src="/assets/clothes/c1/GatosRosa.jpg" alt="modelo-gatos-rosa" class="model-thumb-img">
+              <div class="model-label">Gatos rosa</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="animales">
+              <img src="/assets/clothes/c1/animales.jpg" alt="modelo-animales" class="model-thumb-img">
+              <div class="model-label">Animales</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="gatos">
+              <img src="/assets/clothes/c1/gatos.jpg" alt="modelo-gatos" class="model-thumb-img">
+              <div class="model-label">Gatos</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+ 
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="play">
+              <img src="/assets/clothes/c1/play.jpg" alt="modelo-play" class="model-thumb-img">
+              <div class="model-label">Play</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="torre-eiffel">
+              <img src="/assets/clothes/c1/torre.jpg" alt="modelo-torre" class="model-thumb-img">
+              <div class="model-label">Torre Eiffel</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+             
+            <div class="model" data-src="/assets/clothes/LE.jpg" data-model="caballos">
+              <img src="/assets/clothes/c1/caballos.jpg" alt="modelo-caballos" class="model-thumb-img">
+              <div class="model-label">Caballos</div>
+              <button type="button" class="select-model-btn">Seleccionar</button>
+            </div>
+
+          </div>
+
+          <div id="selectedModel" class="selected-model-text">Modelos seleccionados: Ninguno</div>
+
+          <div class="purchase-row">
+            <div class="wa-box">
+              <i class="fab fa-whatsapp wa-icon"></i>
+              <a id="whatsappBtn" class="btn btn-whatsapp" href="#" target="_blank">Comprar por WhatsApp</a>
+            </div>
+            <span id="selectedCount" class="selected-count">0 seleccionados</span>
+            <span class="stock-status">Stock: Disponible</span>
+          </div>
+        </div>
+
+        <div class="specs">
+          <h3>Especificaciones</h3>
+          <ul>
+            <li>Material: Microfibra de alta densidad</li>
+            <li>Tamaños: Individual / Matrimonial / Queen</li>
+            <li>Cuidado: Lavar a máquina, ciclo suave. No usar blanqueador.</li>
+          </ul>
+        </div>
+
+        <!-- reviews removed as requested -->
+      </div>
+    </section>
+
+    <script>
+      // Thumbnail click -> change main image
+      const mainImg = document.getElementById('mainImg');
+      document.querySelectorAll('.thumbs img').forEach(t => t.addEventListener('click', () => {
+        const src = t.dataset.src || t.src;
+        mainImg.src = src;
+      }));
+
+      // Prepare slideshow from model thumbnails
+      const models = Array.from(document.querySelectorAll('.model'));
+      const slides = models.map(m => m.querySelector('img')?.src || m.dataset.src).filter(Boolean);
+      let slideIndex = 0;
+
+      function showSlide(i){
+        if(!slides.length) return;
+        slideIndex = ((i % slides.length) + slides.length) % slides.length;
+        mainImg.src = slides[slideIndex];
+      }
+
+      // Clicking main image advances to next slide
+      mainImg.addEventListener('click', () => showSlide(slideIndex + 1));
+
+      // Clicking the model image or card shows that model in the main image.
+      models.forEach((m, idx) => {
+        const modelImg = m.querySelector('img');
+        const modelCard = m;
+
+        modelImg.addEventListener('click', (event) => {
+          event.stopPropagation();
+          showSlide(idx);
+        });
+
+        modelCard.addEventListener('click', (event) => {
+          if (event.target.closest('.select-model-btn')) return;
+          showSlide(idx);
+        });
+      });
+
+      // Auto-play slideshow every 3 seconds
+      if(slides.length > 1){
+        setInterval(() => showSlide(slideIndex + 1), 3000);
+      }
+
+      // WhatsApp button: include selected models in the prefilled message
+      const waBtn = document.getElementById('whatsappBtn');
+      const selectedModelLabel = document.getElementById('selectedModel');
+      const selectedCount = document.getElementById('selectedCount');
+      const PHONE = '59169609667';
+      let selectedModels = new Set();
+
+      function updateSelectedDisplay(){
+        const items = Array.from(selectedModels);
+        if(items.length === 0){
+          selectedModelLabel.textContent = 'Modelos seleccionados: Ninguno';
+        } else {
+          selectedModelLabel.textContent = 'Modelos seleccionados: ' + items.join(', ');
+        }
+        if(selectedCount) selectedCount.textContent = `${items.length} seleccionados`;
+      }
+
+      function getModelName(m, idx){
+        return (m.dataset.model || m.querySelector('.model-label')?.textContent || `Modelo ${idx + 1}`).trim();
+      }
+
+      function toggleModelSelection(m, idx){
+        const name = getModelName(m, idx);
+
+        if (selectedModels.has(name)) {
+          selectedModels.delete(name);
+          m.classList.remove('model-selected');
+        } else {
+          selectedModels.add(name);
+          m.classList.add('model-selected');
+        }
+
+        updateSelectedDisplay();
+      }
+
+      // selection only happens from the dedicated button, while image clicks just preview the model
+      models.forEach((m, idx) => {
+        const selectBtn = m.querySelector('.select-model-btn');
+        if (selectBtn) {
+          selectBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleModelSelection(m, idx);
+            showSlide(idx);
+          });
+        }
+      });
+
+      // initialize empty selection
+      updateSelectedDisplay();
+
+      function buildWaUrl(){
+        const modelPart = selectedModels.size ? ` - Modelos: ${Array.from(selectedModels).join('; ')}` : '';
+        const message = `Hola, quiero comprar: C1 - CUBRECAMA${modelPart} - Precio: 140.00 Bs - Cantidad: 1`;
+        return `https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`;
+      }
+
+      if(waBtn){
+        waBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.open(buildWaUrl(), '_blank');
+        });
+      }
+    </script>
+
+  </main>
+
+  <footer id="contact" class="section-p1">
+    <div class="col">
+      <img class="logo" src="/assets/logo/logo.png" alt="">
+      <h3>Contacto</h3>
+      <p><strong>Celular:</strong> 69609667</p>
+      <p><strong>Horarios:</strong> 06:00 - 23:00, lunes - Domingo</p>
+      <div class="follow">
+        <h3>Siguenos para enterarte las novedades</h3>
+        <div class="icon">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-tiktok"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-whatsapp"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>La paz - Bolivia</p>
+    </div>
+  </footer>
+
+  <script src="/js/index.js"></script>
+</body>
+
+</html>
